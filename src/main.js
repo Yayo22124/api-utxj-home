@@ -7,7 +7,7 @@ dotenv.config({
     path: "src/.env"
 })
 
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.PORT || process.env.DEV_PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Express application running in: http://localhost:${port}`);
