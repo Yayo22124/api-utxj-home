@@ -26,7 +26,7 @@ usersController.getUserById = async (req, res, next) => {
     } 
 
     try {
-        const user = await userDao.getAll();
+        const user = await userDao.getUserById(userId);
 
         //! Error: User not found in Database;
         if (!user) {
