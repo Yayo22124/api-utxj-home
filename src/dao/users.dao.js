@@ -4,14 +4,22 @@ export const userDao = {}
 
 // Get All Users
 userDao.getAll = async () => {
-    const users = await User.find({});
+    try {
+        const users = await User.find({});
 
-    return users;
+        return users;
+    } catch (err) {
+        throw new Error("Error getting users.")
+    }
 }
 
 // Get User
 userDao.getUserById = async ( id ) => {
-    const user = await User.findOne({ id });
-
-    return user;
+    try {
+        const user = await User.findOne({ id });
+    
+        return user;
+    } catch (err) {
+        throw new Error("Error getting user.")
+    }
 }
