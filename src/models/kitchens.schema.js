@@ -11,7 +11,7 @@ const kitchenSchema = new Schema({
     location: String,
     sensors: [],
     actuators: [],
-    estatus: Boolean
+    status: Boolean
 },{
     versionKey: false,
     timestamps: true
