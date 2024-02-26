@@ -1,6 +1,7 @@
+import { roomsRouter, usersRouter } from "./routes/index.js";
+
 import Express from "express";
 import  morgan  from "morgan";
-import { usersRouter } from "./routes/index.js";
 
 // ! Express instance for application.
 const app = new Express();
@@ -16,6 +17,7 @@ app.use(Express.urlencoded({
 //* Routes
 const apiUrl = "/api/v1";
 app.use(`${apiUrl}/users`, usersRouter);
+app.use(`${apiUrl}/rooms`, roomsRouter);
 
 
 // ! Middleware for management errors
