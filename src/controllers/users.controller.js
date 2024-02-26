@@ -12,7 +12,7 @@ usersController.getAllUsers = async (req, res, next) => {
         console.error(`Error en getAllUsers: ${err}`);
         res.status(500).json({
             status: 500,
-            error: "Error getting users."
+            error: err
         });
     }
 }
@@ -42,7 +42,7 @@ usersController.getUserById = async (req, res, next) => {
         console.error(`Error en getUserById: ${err}`);
         res.status(500).json({
             status: 500,
-            error: "Error getting user."
+            error: err
         });
     }
 }
