@@ -6,7 +6,10 @@ usersController.getAllUsers = async (req, res, next) => {
     try {
         const users = await userDao.getAll();
         //* Response
-        res.json(users);
+        res.status(200).json({
+            status: 200,
+            users
+        });
     } catch (err) {
         //! Query Error
         console.error(`Error en getAllUsers: ${err}`);
@@ -36,7 +39,10 @@ usersController.getUserById = async (req, res, next) => {
             })    
         } 
 
-        res.json({user});
+        res.status(200).json({
+            status: 200,
+            user
+        });
     } catch (err) {
         //! Query Error
         console.error(`Error en getUserById: ${err}`);
