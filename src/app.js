@@ -1,6 +1,11 @@
 import Express from "express";
 import bedroomsRouter  from "./routes/bedrooms.routes.js";
+<<<<<<< HEAD
 import kitchenRouter from "./routes/kitchen.routes.js";
+=======
+import bathroomsRouter from "./routes/bathrooms.routes.js";
+import garageRouter from "./routes/garage.routes.js";
+>>>>>>> b945921f5c86332a0ce4b123df5174a0826b6bea
 import { errorHandler } from "./middlewares/index.js";
 import  morgan  from "morgan";
 
@@ -20,7 +25,12 @@ app.use(Express.urlencoded({
 //* Routes
 const apiUrl = "/api/v1"; // Routes root endpoint
 app.use(`${apiUrl}/bedrooms`, bedroomsRouter)
+<<<<<<< HEAD
 app.use(`${apiUrl}/kitchens`, kitchenRouter)
+=======
+app.use(`${apiUrl}/bathrooms`, bathroomsRouter)
+app.use(`${apiUrl}/garage`, garageRouter)
+>>>>>>> b945921f5c86332a0ce4b123df5174a0826b6bea
 
 // ! Middleware for management errors
 app.use(errorHandler)

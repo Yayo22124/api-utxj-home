@@ -11,4 +11,12 @@
 
 */
 export * from "./bedrooms.controller.js"
+<<<<<<< HEAD
 export * from "./kitchen.controller.js"
+=======
+<<<<<<< HEAD
+export * from "./garage.controller.js"
+=======
+export * from "./bathrooms.controller.js"
+>>>>>>> eb1fd773c943107a078100c4bdbb87fb2eced35b
+>>>>>>> b945921f5c86332a0ce4b123df5174a0826b6bea
