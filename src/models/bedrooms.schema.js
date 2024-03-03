@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const sensorSchema = new Schema({
+const bedroomSchema = new Schema({
     type: String,
     name: String,
     brand: String,
@@ -14,8 +14,14 @@ const sensorSchema = new Schema({
     endsAt: String,
     readings: [{
         name: String,
-        value: Float,
+        value: Number,
+        measuramentUnit: String 
+    }],
+    actions: [{
+        name: String,
+        value: Number,
+        duration: Number,
         measuramentUnit: String 
     }]
 })
-export default model('sensor', sensorSchema);
+export default model('bedroom', bedroomSchema);
