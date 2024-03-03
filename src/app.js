@@ -13,7 +13,7 @@ app.use(Express.urlencoded({
 }))
 
 //* Routes
-const apiUrl = "/api/v1";
+const apiUrl = "/api/v1"; // Routes root endpoint
 
 
 // ! Middleware for management errors
