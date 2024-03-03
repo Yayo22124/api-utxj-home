@@ -18,7 +18,7 @@ bedroomDao.getAllBedrooms = async () => {
 bedroomDao.getBedroomsSensors = async () => {
     try {
         const sensorsData = await Bedroom.find({
-            type: "Sensor"
+            type: /sensor/i
         }).limit(1);
     
         return sensorsData;
@@ -31,7 +31,35 @@ bedroomDao.getBedroomsSensors = async () => {
 bedroomDao.getBedroomsActuators = async () => {
     try {
         const actuatorsData = await Bedroom.find({
-            type: "Actuator"
+            type: /actuator|actuador/i
+        }).limit(1);
+    
+        return actuatorsData;
+    } catch (error) {
+        console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
+        throw error;
+    }
+}
+
+bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
+    try {
+        const sensorsData = await Bedroom.find({
+            type: /sensor/i,
+            location: bedroomName
+        }).limit(1);
+    
+        return sensorsData;
+    } catch (error) {
+        console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
+        throw error;
+    }
+}
+
+bedroomDao.getBedroomsActuatorsByName = async (bedroomName) => {
+    try {
+        const actuatorsData = await Bedroom.find({
+            type: /actuator|actuador/i,
+            location: bedroomName
         }).limit(1);
     
         return actuatorsData;

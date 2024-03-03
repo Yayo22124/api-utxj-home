@@ -20,6 +20,27 @@ bedroomsController.getAllBedroomsData = async (req, res, next) => {
     }
 }
 
+bedroomsController.getAllBedroomsDataByName = async (req, res, next) => {
+    try {
+        const bedroomName = req.query.location;
+        if (!bedroomName) {
+            throw new NotFoundException("Bedroom name is required like request param.")
+        }
+        const sensorsData = await bedroomDao.getBedroomsSensors();
+        const actuatorsData = await bedroomDao.getBedroomsActuators();
+
+        res.status(200).json({
+            success: true,
+            sensorsData,
+            actuatorsData
+        })
+    } catch (error) {
+        console.error(`Error in Bedrooms Controller: getAllBedroomsData: ${error.message}`);
+        next(error) //Continue to global error handler (error middleware) 
+        throw error;
+    }
+}
+
 bedroomsController.getOneBedroomByName = async (req, res, next) => {
     try {
         const bedroomName = req.params.name;
