@@ -23,5 +23,8 @@ const bedroomSchema = new Schema({
         duration: Number,
         measuramentUnit: String 
     }]
+},{
+    timestamps: true,
+    versionKey: false
 })
 export default model('bedroom', bedroomSchema);

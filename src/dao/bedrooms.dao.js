@@ -52,14 +52,29 @@ bedroomDao.getBedroomsActuators = async () => {
 }
 
 // ! Get only information of bedrooms filter by type = sensors and by location name
-bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
+bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 10, sortBy, typeSort = 'asc') => {
     try {
-        const sensorsData = await Bedroom.find({
+        let sensorsData = [];
+        if (sortBy) {
+            // Check if sortBy is a valid property of Bedroom
+            const validSortProperty = Object.keys(Bedroom.schema.paths).includes(sortBy);
+
+            if (validSortProperty) {
+                return sensorsData = await Bedroom.find({
+                    type: /sensor/i,
+                    location: bedroomName
+                }).sort({
+                    sortBy: typeSort == 'asc' ? 1 : -1
+                }).limit(limit);
+            } else {
+                throw new Error(`${sortBy} is not a valid property of Bedroom to sort.`)
+            }
+        }
+
+        return sensorsData = await Bedroom.find({
             type: /sensor/i,
             location: bedroomName
-        });
-        
-        return sensorsData;
+        }).limit(limit);
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
         throw error;
@@ -67,18 +82,42 @@ bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
 }
 
 // ! Get only information of bedrooms filter by type = actuators and by location name
-bedroomDao.getBedroomsActuatorsByName = async (bedroomName) => {
+bedroomDao.getBedroomsActuatorsByName = async (bedroomName, limit = 10, sortBy, typeSort = 'asc') => {
     try {
-        const actuatorsData = await Bedroom.find({
+        let actuatorsData = [];
+        if (sortBy) {
+            // Check if sortBy is a valid property of Bedroom
+            const validSortProperty = Object.keys(Bedroom.schema.paths).includes(sortBy);
+
+            if (validSortProperty) {
+                return actuatorsData = await Bedroom.find({
+                    type: /actuator|actuador/i,
+                    location: bedroomName
+                }).sort({
+                    sortBy: typeSort == 'asc' ? 1 : -1
+                }).limit(limit);
+            } else {
+                throw new Error(`${sortBy} is not a valid property of Bedroom to sort.`)
+            }
+        }
+
+        return actuatorsData = await Bedroom.find({
             type: /actuator|actuador/i,
             location: bedroomName
-        }).sort({
-            initialDate: 1
-        });
-    
-        return actuatorsData;
+        }).limit(limit);
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
+        throw error;
+    }
+}
+
+bedroomDao.createBedroomData = async (newData) => {
+    try {
+        const savedData = await Bedroom.create(newData);
+
+        return savedData;
+    } catch (error) {
+        console.error(`Error in bedroomDao createBedroomData: ${error.message}`);
         throw error;
     }
 }
