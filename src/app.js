@@ -1,5 +1,3 @@
-import { roomsRouter, usersRouter } from "./routes/index.js";
-
 import Express from "express";
 import  morgan  from "morgan";
 
@@ -16,8 +14,6 @@ app.use(Express.urlencoded({
 
 //* Routes
 const apiUrl = "/api/v1";
-app.use(`${apiUrl}/users`, usersRouter);
-app.use(`${apiUrl}/rooms`, roomsRouter);
 
 
 // ! Middleware for management errors
@@ -34,7 +30,7 @@ app.use((req, res, next) => {
     res.status(404).json({
         status: 404,
         error: "Endpoint not available or not found.",
-        message: "Page not found, please sure to use a correct endpoints like /api/v1/users/"
+        message: "Page not found, please sure to use a correct endpoints like"
     })
 })
 
