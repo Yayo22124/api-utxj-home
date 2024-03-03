@@ -25,8 +25,8 @@ const apiUrl = "/api/v1"; // Routes root endpoint
 app.use(`${apiUrl}/bedrooms`, bedroomsRouter)
 app.use(`${apiUrl}/kitchens`, kitchenRouter)
 app.use(`${apiUrl}/bathrooms`, bathroomsRouter)
-app.use(`${apiUrl}/garage`, garageRouter)
-app.use(`${apiUrl}/livingroom`, livingroomRouter)
+app.use(`${apiUrl}/garages`, garageRouter)
+app.use(`${apiUrl}/livingrooms`, livingroomRouter)
 
 // ! Middleware for management errors
 app.use(errorHandler)
