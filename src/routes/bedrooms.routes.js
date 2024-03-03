@@ -4,6 +4,6 @@ import { bedroomsController } from "../controllers/index.js"
 const bedroomsRouter = Router(); 
 
 bedroomsRouter.get('/', bedroomsController.getAllBedroomsData)
-bedroomsRouter.get('/?location', bedroomsController.getAllBedroomsDataByName)
+bedroomsRouter.get('/', bedroomsController.getAllBedroomsDataByName)
 
 export default bedroomsRouter

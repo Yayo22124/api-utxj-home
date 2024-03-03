@@ -5,8 +5,17 @@ export const bedroomsController = {}
 
 bedroomsController.getAllBedroomsData = async (req, res, next) => {
     try {
-        const sensorsData = await bedroomDao.getBedroomsSensors();
-        const actuatorsData = await bedroomDao.getBedroomsActuators();
+        let sensorsData = [];
+        let actuatorsData = []
+        const bedroomName = req.query.location;
+        console.log(bedroomName);
+        if (bedroomName) {
+            sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName);
+            actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName);
+        } else {
+            sensorsData = await bedroomDao.getBedroomsSensors();
+            actuatorsData = await bedroomDao.getBedroomsActuators();
+        }
 
         res.status(200).json({
             success: true,
@@ -23,11 +32,12 @@ bedroomsController.getAllBedroomsData = async (req, res, next) => {
 bedroomsController.getAllBedroomsDataByName = async (req, res, next) => {
     try {
         const bedroomName = req.query.location;
+        console.log(bedroomName);
         if (!bedroomName) {
             throw new NotFoundException("Bedroom name is required like request param.")
         }
-        const sensorsData = await bedroomDao.getBedroomsSensors();
-        const actuatorsData = await bedroomDao.getBedroomsActuators();
+        const sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName);
+        const actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName);
 
         res.status(200).json({
             success: true,
