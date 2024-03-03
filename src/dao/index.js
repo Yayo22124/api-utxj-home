@@ -11,4 +11,5 @@
 
 */
 export * from "./bedrooms.dao.js"
+export * from "./livingroom.dao.js"
 // export * from "./actuators.dao.js"

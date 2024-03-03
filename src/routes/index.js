@@ -11,3 +11,4 @@
 
 */
 export * from "./bedrooms.routes.js"
+export * from "./livingroom.routes.js"
