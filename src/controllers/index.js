@@ -11,10 +11,7 @@
 
 */
 export * from "./bedrooms.controller.js"
-<<<<<<< HEAD
 export * from "./livingroom.controller.js"
-=======
 export * from "./garage.controller.js"
 export * from "./bathrooms.controller.js"
 export * from "./kitchen.controller.js"
->>>>>>> 42462e2e1bd47c72fc4e653323478ef537735b6c
