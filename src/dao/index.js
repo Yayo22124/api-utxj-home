@@ -11,10 +11,6 @@
 
 */
 export * from "./bedrooms.dao.js"
-<<<<<<< HEAD
 export * from "./garage.dao.js"
-
-=======
 export * from "./bathrooms.dao.js"
->>>>>>> eb1fd773c943107a078100c4bdbb87fb2eced35b
 // export * from "./actuators.dao.js"
