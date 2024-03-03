@@ -11,3 +11,4 @@
 
 */
 export * from "./bedrooms.controller.js"
+export * from "./bathrooms.controller.js"
