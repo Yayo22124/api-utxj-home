@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
-const actuatorSchema = new Schema({
+
+const garageSchema = new Schema({
     type: String,
     name: String,
     brand: String,
@@ -11,11 +12,20 @@ const actuatorSchema = new Schema({
     owner: String,
     startsAt: String,
     endsAt: String,
+    readings: [{
+        name: String,
+        value: Number,
+        measuramentUnit: String 
+    }],
     actions: [{
         name: String,
-        value: Float,
-        duration: Float,
+        value: Number,
+        duration: Number,
         measuramentUnit: String 
     }]
+},{
+    timestamps: true,
+    versionKey: false
 })
-export default model('actuator', actuatorSchema);
+
+export default model('garage', garageSchema);
