@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 
 dotenv.config({path: "src/.env"})
 
-const connectionUrl = process.env.CONNECTION_DB || "mongodb://localhost:27017"; 
+const connectionUrl = process.env.CONNECTION_DB; 
 
 try {
     Mongoose.connect(connectionUrl)

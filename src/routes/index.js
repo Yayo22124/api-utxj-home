@@ -11,4 +11,8 @@
 
 */
 export * from "./bedrooms.routes.js"
+<<<<<<< HEAD
+export * from "./kitchen.routes.js"
+=======
 export * from "./garage.routes.js"
+>>>>>>> b945921f5c86332a0ce4b123df5174a0826b6bea

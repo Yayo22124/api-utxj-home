@@ -13,3 +13,4 @@
 export * from "./bedrooms.controller.js"
 export * from "./garage.controller.js"
 export * from "./bathrooms.controller.js"
+export * from "./kitchen.controller.js"

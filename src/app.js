@@ -1,5 +1,6 @@
 import Express from "express";
 import bedroomsRouter  from "./routes/bedrooms.routes.js";
+import kitchenRouter from "./routes/kitchen.routes.js";
 import bathroomsRouter from "./routes/bathrooms.routes.js";
 import garageRouter from "./routes/garage.routes.js";
 import { errorHandler } from "./middlewares/index.js";
@@ -21,6 +22,7 @@ app.use(Express.urlencoded({
 //* Routes
 const apiUrl = "/api/v1"; // Routes root endpoint
 app.use(`${apiUrl}/bedrooms`, bedroomsRouter)
+app.use(`${apiUrl}/kitchens`, kitchenRouter)
 app.use(`${apiUrl}/bathrooms`, bathroomsRouter)
 app.use(`${apiUrl}/garage`, garageRouter)
 
