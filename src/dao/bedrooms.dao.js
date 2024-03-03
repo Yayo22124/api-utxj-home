@@ -4,6 +4,7 @@ import { NotFoundException } from "../errors/index.js" //! Custom errors
 // bedroomsDao object
 export const bedroomDao = {}
 
+// ! Get all information of bedrooms (all bedrooms and sensors/actuators)
 bedroomDao.getAllBedrooms = async () => {
     try {
         const bedroomsData = await Bedroom.find({});
@@ -15,12 +16,14 @@ bedroomDao.getAllBedrooms = async () => {
     }
 }
 
+
+// ! Get only information of bedrooms filter by type = sensors
 bedroomDao.getBedroomsSensors = async () => {
     try {
         const sensorsData = await Bedroom.find({
             type: /sensor/i
         }).limit(1);
-    
+        
         return sensorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
@@ -28,12 +31,13 @@ bedroomDao.getBedroomsSensors = async () => {
     }
 }
 
+// ! Get only information of bedrooms filter by type = actuators
 bedroomDao.getBedroomsActuators = async () => {
     try {
         const actuatorsData = await Bedroom.find({
             type: /actuator|actuador/i
         }).limit(1);
-    
+        
         return actuatorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
@@ -41,13 +45,14 @@ bedroomDao.getBedroomsActuators = async () => {
     }
 }
 
+// ! Get only information of bedrooms filter by type = sensors and by location name
 bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
     try {
         const sensorsData = await Bedroom.find({
             type: /sensor/i,
             location: bedroomName
         }).limit(1);
-    
+        
         return sensorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
@@ -55,6 +60,7 @@ bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
     }
 }
 
+// ! Get only information of bedrooms filter by type = actuators and by location name
 bedroomDao.getBedroomsActuatorsByName = async (bedroomName) => {
     try {
         const actuatorsData = await Bedroom.find({
@@ -65,24 +71,6 @@ bedroomDao.getBedroomsActuatorsByName = async (bedroomName) => {
         return actuatorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
-        throw error;
-    }
-}
-
-bedroomDao.getOneBedroomById = async (sensorId) => {
-    try {
-        const bedroomData = await Bedroom.findOne({
-            _id: sensorId
-        });
-
-        // If bedroomData is null or undefined, shoot a NotFound Error
-        if (!bedroomData) {
-            throw new NotFoundException(`Bedroom with ID: ${sensorId} not found.`)
-        }
-
-        return bedroomData;
-    } catch (error) {
-        console.error(`Error in bedroomDao getOneSensorById: ${error.message}`);
         throw error;
     }
 }
