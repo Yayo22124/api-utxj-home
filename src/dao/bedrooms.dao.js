@@ -7,7 +7,9 @@ export const bedroomDao = {}
 // ! Get all information of bedrooms (all bedrooms and sensors/actuators)
 bedroomDao.getAllBedrooms = async () => {
     try {
-        const bedroomsData = await Bedroom.find({});
+        const bedroomsData = await Bedroom.find({}).sort({
+            initialDate: 1
+        });
 
         return bedroomsData;
     } catch (error) {
@@ -22,7 +24,9 @@ bedroomDao.getBedroomsSensors = async () => {
     try {
         const sensorsData = await Bedroom.find({
             type: /sensor/i
-        }).limit(1);
+        }).sort({
+            initialDate: 1
+        });
         
         return sensorsData;
     } catch (error) {
@@ -36,7 +40,9 @@ bedroomDao.getBedroomsActuators = async () => {
     try {
         const actuatorsData = await Bedroom.find({
             type: /actuator|actuador/i
-        }).limit(1);
+        }).sort({
+            initialDate: 1
+        });
         
         return actuatorsData;
     } catch (error) {
@@ -51,7 +57,7 @@ bedroomDao.getBedroomsSensorsByName = async (bedroomName) => {
         const sensorsData = await Bedroom.find({
             type: /sensor/i,
             location: bedroomName
-        }).limit(1);
+        });
         
         return sensorsData;
     } catch (error) {
@@ -66,7 +72,9 @@ bedroomDao.getBedroomsActuatorsByName = async (bedroomName) => {
         const actuatorsData = await Bedroom.find({
             type: /actuator|actuador/i,
             location: bedroomName
-        }).limit(1);
+        }).sort({
+            initialDate: 1
+        });
     
         return actuatorsData;
     } catch (error) {
