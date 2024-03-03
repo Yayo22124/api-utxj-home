@@ -14,7 +14,7 @@ bedroomsController.getAllBedroomsData = async (req, res, next) => {
         const dataLimit = req.query.limit;
         const dataSortBy = req.query.sortBy;
         const dataTypeSort = req.query.typeSort;
-
+        
         //* if bedroom name exist, controller get data filtered by location
         if (bedroomName) {
             sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');

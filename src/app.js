@@ -1,5 +1,6 @@
 import Express from "express";
 import bedroomsRouter  from "./routes/bedrooms.routes.js";
+import kitchenRouter from "./routes/kitchen.routes.js";
 import { errorHandler } from "./middlewares/index.js";
 import  morgan  from "morgan";
 
@@ -19,6 +20,7 @@ app.use(Express.urlencoded({
 //* Routes
 const apiUrl = "/api/v1"; // Routes root endpoint
 app.use(`${apiUrl}/bedrooms`, bedroomsRouter)
+app.use(`${apiUrl}/kitchens`, kitchenRouter)
 
 // ! Middleware for management errors
 app.use(errorHandler)
