@@ -1,10 +1,11 @@
 import Express from "express";
-import bedroomsRouter  from "./routes/bedrooms.routes.js";
-import kitchenRouter from "./routes/kitchen.routes.js";
 import bathroomsRouter from "./routes/bathrooms.routes.js";
-import garageRouter from "./routes/garage.routes.js";
-import livingroomRouter  from "./routes/livingroom.routes.js";
+import bedroomsRouter  from "./routes/bedrooms.routes.js";
+import cors from "cors";
 import { errorHandler } from "./middlewares/index.js";
+import garageRouter from "./routes/garage.routes.js";
+import kitchenRouter from "./routes/kitchen.routes.js";
+import livingroomRouter  from "./routes/livingroom.routes.js";
 import  morgan  from "morgan";
 
 // ! Express instance for application.
@@ -14,6 +15,7 @@ const app = new Express();
 
 //* Settings
 //* Middlewares
+app.use(cors())
 app.use(Express.json()) // Use JSON estandard for Express Application.
 app.use(morgan('dev'))
 app.use(Express.urlencoded({
