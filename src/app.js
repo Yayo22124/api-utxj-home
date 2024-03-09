@@ -7,6 +7,7 @@ import garageRouter from "./routes/garage.routes.js";
 import kitchenRouter from "./routes/kitchen.routes.js";
 import livingroomRouter  from "./routes/livingroom.routes.js";
 import  morgan  from "morgan";
+import roomsRouter from "./routes/rooms.routes.js";
 
 // ! Express instance for application.
 const app = new Express();
@@ -29,6 +30,7 @@ app.use(`${apiUrl}/kitchens`, kitchenRouter)
 app.use(`${apiUrl}/bathrooms`, bathroomsRouter)
 app.use(`${apiUrl}/garages`, garageRouter)
 app.use(`${apiUrl}/livingrooms`, livingroomRouter)
+app.use(`${apiUrl}/rooms`, roomsRouter)
 
 // ! Middleware for management errors
 app.use(errorHandler)
