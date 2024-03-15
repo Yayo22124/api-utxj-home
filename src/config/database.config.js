@@ -7,10 +7,12 @@ const connectionUrl = process.env.CONNECTION_DB;
 
 try {
     Mongoose.connect(connectionUrl)
-    db => console.log(`
-    ############################## /n
+    console.log(`
+    #############################################
+
         Mongo Database Succesfully Connected
-    /n##############################
+        
+    #############################################
     `)
 
 } catch (err) {
