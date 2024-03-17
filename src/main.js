@@ -9,5 +9,14 @@ dotenv.config({
 const port = process.env.PORT;
 
 app.listen(port, () => {
-    console.log(`Express application running in: http://localhost:${port}`);
+    console.log(`
+    ##############################################################
+
+        Express API REST Application is running and listening on:
+        
+            Local: http://localhost:${port}
+            Railway: https://api-utxj-home.up.railway.app/
+
+    ##############################################################
+    `);
 }) 
