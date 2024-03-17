@@ -1,5 +1,5 @@
-import { NotFoundException } from "../errors/NotFoundException.error.js";
 import { KitchenDao } from "../dao/index.js" ;
+import { NotFoundException } from "../errors/NotFoundException.error.js";
 
 export const kitchensController = {}
 
@@ -17,8 +17,8 @@ kitchensController.getAllkitchensData = async (req, res, next) => {
         
         //* if kitchen name exist, controller get data filtered by location
         if (kitchenName) {
-            sensorsData = await KitchenDao.getKitchensSensorsByName(kitchenName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
-            actuatorsData = await KitchenDao.getKitchensActuatorsByName(kitchenName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
+            sensorsData = await KitchenDao.getKitchensSensorsByName(kitchenName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
+            actuatorsData = await KitchenDao.getKitchensActuatorsByName(kitchenName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
         } else { 
             // * if kitchen name not exist, data get of all kitchens
             sensorsData = await KitchenDao.getKitchensSensors();

@@ -17,8 +17,8 @@ garageController.getAllgarageData = async (req, res, next) => {
 
         //* if bedroom name exist, controller get data filtered by location
         if (garageName) {
-            sensorsData = await garageDao.getgarageSensorsByName(garageName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
-            actuatorsData = await garageDao.getgarageActuatorsByName(garageName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
+            sensorsData = await garageDao.getgarageSensorsByName(garageName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
+            actuatorsData = await garageDao.getgarageActuatorsByName(garageName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
         } else { 
             // * if bedroom name not exist, data get of all bedrooms
             sensorsData = await garageDao.getgarageSensors();

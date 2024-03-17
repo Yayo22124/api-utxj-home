@@ -17,8 +17,8 @@ bedroomsController.getAllBedroomsData = async (req, res, next) => {
         
         //* if bedroom name exist, controller get data filtered by location
         if (bedroomName) {
-            sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
-            actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName, dataLimit || 10, dataSortBy || 'createdAt', dataTypeSort || 'asc');
+            sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
+            actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
         } else { 
             // * if bedroom name not exist, data get of all bedrooms
             sensorsData = await bedroomDao.getBedroomsSensors();
