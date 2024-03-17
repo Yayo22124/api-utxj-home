@@ -113,17 +113,6 @@ Esta API REST está basada en endpoints para cada tipo de cuarto contemplado en 
 }
 ```
 
-
-
-## Usage/Examples
-
-```json
-{
-    "name": 
-}
-```
-
-
 ## Instalación
 
 Clona este repositorio en tu sistema:
