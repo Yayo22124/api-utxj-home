@@ -161,6 +161,8 @@ O en su defecto en modo producción:
   npm run start:prod
 ```
 
+## Contribuidores
+
 <table>
   <tbody>
     <tr>
