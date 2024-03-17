@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     res.status(404).json({
         status: 404,
         error: "Endpoint not available or not found.",
-        message: "Page not found, please sure to use a correct endpoints like"
+        message: "Page not found, please sure to use a correct endpoints like /api/v1/bedrooms/"
     })
 })
 
