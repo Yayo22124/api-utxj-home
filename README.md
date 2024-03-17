@@ -1,6 +1,9 @@
 
 # iHouse API REST Documentación
 
+<p align="center"><img width="460" height="300" src="/docs/logo.svg" alt="iHouse Logo"></p>
+
+
 iHouse es un proyecto por parte de la carrera de T.I en Desarrollo de Software Multiplataforma de la **UTXJ**, desarrollado por los alumnos del **5 B** (Quinto Cuatrimestre Grupo B), para dar lógica y ofrecer servicios con el fin de ser consumidos por una aplicación de control y gestión de una casa domótica, garantizando la unión de materias como Internet de las Cosas (IoT), Bases de Datos para Cómputo en la Nube (BDCN) y Aplicaciones Web para la Industria 4.0.
 
 Este documento presenta la información y documentación necesaria para hacer uso de la API REST creada para manejar los datos de la casa.
@@ -173,6 +176,8 @@ O en su defecto en modo producción:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ederdal"><img src="https://avatars.githubusercontent.com/Ederdal" width="100px;" alt="Edgar"/><br /><sub><b>Edgar Cruz</b></sub></a><br /></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MendezPro"><img src="https://avatars.githubusercontent.com/MendezPro" width="100px;" alt="Orlando Méndez"/><br /><sub><b>Orlando Méndez</b></sub></a><br /></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ali-2121"><img src="https://avatars.githubusercontent.com/Ali-2121" width="100px;" alt="Alina Bonilla"/><br /><sub><b>Alina Bonilla</b></sub></a><br /></td>
+    </tr>
+    <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aldotd12"><img src="https://avatars.githubusercontent.com/Aldotd12" width="100px;" alt="Aldo Tolentino"/><br /><sub><b>Aldo Tolentino</b></sub></a><br /></td>
     </tr>
   </tbody>
