@@ -9,6 +9,9 @@ Este documento presenta la información y documentación necesaria para hacer us
 
 ## API REST Endpoints
 
+> [!IMPORTANT]  
+> La url para la API REST en **Railway** (Sin ningún endpoint) es: https://api-utxj-home.up.railway.app
+
 Esta API REST está basada en endpoints para cada tipo de cuarto contemplado en la casa:
 
 - Recámara/s (bedrooms).
