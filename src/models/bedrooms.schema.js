@@ -5,26 +5,32 @@ const bedroomSchema = new Schema({
     name: String,
     brand: String,
     model: String,
-    specifications: [],
+    specifications: [{
+        name: String,
+        maxValue: Number,
+        minValue: Number,
+        measurementUnit: String,
+        accuracy: String
+    }],
     location: String,
     status: String,
-    initialDate: String,
+    registeredDate: {
+        type: Date,
+        default: Date.now
+    },
     owner: String,
-    startsAt: String,
-    endsAt: String,
     readings: [{
         name: String,
         value: Number,
-        measuramentUnit: String 
+        measurementUnit: String
     }],
     actions: [{
         name: String,
         value: Number,
-        duration: Number,
-        measuramentUnit: String 
+        measurementUnit: String
     }]
 },{
-    timestamps: true,
     versionKey: false
-})
+});
+
 export default model('bedroom', bedroomSchema);

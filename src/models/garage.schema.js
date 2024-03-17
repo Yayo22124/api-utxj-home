@@ -5,27 +5,26 @@ const garageSchema = new Schema({
     name: String,
     brand: String,
     model: String,
-    specifications: [],
+    specifications: [{}],
     location: String,
     status: String,
-    initialDate: String,
+    registeredDate: {
+        type: Date,
+        default: Date.now
+    },
     owner: String,
-    startsAt: String,
-    endsAt: String,
     readings: [{
         name: String,
         value: Number,
-        measuramentUnit: String 
+        measurementUnit: String
     }],
     actions: [{
         name: String,
         value: Number,
-        duration: Number,
-        measuramentUnit: String 
+        measurementUnit: String
     }]
 },{
-    timestamps: true,
     versionKey: false
-})
+});
 
 export default model('garage', garageSchema);
