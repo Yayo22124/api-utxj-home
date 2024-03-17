@@ -1,7 +1,7 @@
 
 # iHouse API REST Documentación
 
-<p align="center"><img width="460" height="300" src="/docs/logo.svg" alt="iHouse Logo"></p>
+<p align="center"><img width="460" src="/docs/shot_ihouse.png" alt="iHouse Shot"></p>
 
 
 iHouse es un proyecto por parte de la carrera de T.I en Desarrollo de Software Multiplataforma de la **UTXJ**, desarrollado por los alumnos del **5 B** (Quinto Cuatrimestre Grupo B), para dar lógica y ofrecer servicios con el fin de ser consumidos por una aplicación de control y gestión de una casa domótica, garantizando la unión de materias como Internet de las Cosas (IoT), Bases de Datos para Cómputo en la Nube (BDCN) y Aplicaciones Web para la Industria 4.0.
@@ -152,7 +152,7 @@ Este proyecto protege información importante de la aplicación como la URL de c
 
 ## Ejecutar Proyecto
 
-Inicial el servidor en modo desarrollo:
+Iniciar el servidor en modo desarrollo:
 
 ```bash
   npm run start:dev
