@@ -17,8 +17,8 @@ livingroomController.getAll = async (req, res, next) => {
 
         //* if livingroom name exist, controller get data filtered by location
         if (roomName) {
-            sensorsData = await livingroomDao.getLivingroomSensorsByName(roomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
-            actuatorsData = await livingroomDao.getLivingroomActuatorsByName(roomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort || 'asc');
+            sensorsData = await livingroomDao.getLivingroomSensorsByName(roomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
+            actuatorsData = await livingroomDao.getLivingroomActuatorsByName(roomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
         } else { 
             // * if livingroom name not exist, data get of all livingroom
             sensorsData = await livingroomDao.getLivingroomSensors();

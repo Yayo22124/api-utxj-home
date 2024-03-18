@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const livingroomSchema = new Schema({
+    arduinoIp: String,
     type: String,
     name: String,
     brand: String,
@@ -20,8 +21,7 @@ const livingroomSchema = new Schema({
     }],
     actions: [{
         name: String,
-        value: Number,
-        measurementUnit: String
+        value: Boolean
     }]
 },{
     versionKey: false
