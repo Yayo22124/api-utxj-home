@@ -6,13 +6,7 @@ const bedroomSchema = new Schema({
     name: String,
     brand: String,
     model: String,
-    specifications: [{
-        name: String,
-        maxValue: Number,
-        minValue: Number,
-        measurementUnit: String,
-        accuracy: String
-    }],
+    specifications: [{}],
     location: String,
     status: String,
     registeredDate: {
