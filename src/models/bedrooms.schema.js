@@ -14,15 +14,8 @@ const bedroomSchema = new Schema({
         default: Date.now
     },
     owner: String,
-    readings: [{
-        name: String,
-        value: Number,
-        measurementUnit: String
-    }],
-    actions: [{
-        name: String,
-        value: Boolean
-    }]
+    readings: [],
+    actions: []
 },{
     versionKey: false
 });

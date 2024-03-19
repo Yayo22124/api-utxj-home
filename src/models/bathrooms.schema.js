@@ -15,13 +15,8 @@ const bathroomSchema = new Schema({
     },
     owner: String,
     readings: [{
-        name: String,
-        value: Number,
-        measurementUnit: String
     }],
     actions: [{
-        name: String,
-        value: Boolean
     }]
 },{
     versionKey: false
