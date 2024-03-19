@@ -1,5 +1,6 @@
 import Bathroom from "../models/bathrooms.schema.js";
 import { NotFoundException } from "../errors/index.js"
+
 export const bathroomDao = {}
 bathroomDao.getAllBathrooms = async () => {
     try {
@@ -104,3 +105,45 @@ bathroomDao.createBathroomData = async (newData) => {
         throw error;
     }
 }
+
+bathroomDao.getLastRecords = async (bathroomName) => {
+    try {
+        const sensorsLastRecord = await Bathroom.aggregate([
+            { 
+                $match: {
+                    type: /sensor/i,
+                    location: bathroomName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        const actuatorsLastRecord = await Bathroom.aggregate([
+            { 
+                $match: {
+                    type: /actuador/i,
+                    location: bathroomName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        return {
+            sensorsLastRecord,
+            actuatorsLastRecord
+        };
+    } catch (error) {
+        console.error(`Error in getLastRecords: ${error.message}`);
+        throw error;
+    }
+};

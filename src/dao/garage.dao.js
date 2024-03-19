@@ -1,5 +1,5 @@
-import garage from "../models/garage.schema.js";
 import { NotFoundException } from "../errors/index.js" //! Custom errors
+import garage from "../models/garage.schema.js";
 
 // garageDao object
 export const garageDao = {}
@@ -120,3 +120,45 @@ garageDao.creategarageData = async (newData) => {
         throw error;
     }
 }
+
+garageDao.getLastRecords = async (garageName) => {
+    try {
+        const sensorsLastRecord = await garage.aggregate([
+            { 
+                $match: {
+                    type: /sensor/i,
+                    location: garageName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        const actuatorsLastRecord = await garage.aggregate([
+            { 
+                $match: {
+                    type: /actuador/i,
+                    location: garageName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        return {
+            sensorsLastRecord,
+            actuatorsLastRecord
+        };
+    } catch (error) {
+        console.error(`Error in getLastRecords: ${error.message}`);
+        throw error;
+    }
+};

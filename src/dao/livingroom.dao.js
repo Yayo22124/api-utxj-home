@@ -121,3 +121,45 @@ livingroomDao.createLivingroomData = async (newData) => {
         throw error;
     }
 }
+
+livingroomDao.getLastRecords = async (livingroomName) => {
+    try {
+        const sensorsLastRecord = await Livingroom.aggregate([
+            { 
+                $match: {
+                    type: /sensor/i,
+                    location: livingroomName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        const actuatorsLastRecord = await Livingroom.aggregate([
+            { 
+                $match: {
+                    type: /actuador/i,
+                    location: livingroomName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        return {
+            sensorsLastRecord,
+            actuatorsLastRecord
+        };
+    } catch (error) {
+        console.error(`Error in getLastRecords: ${error.message}`);
+        throw error;
+    }
+};

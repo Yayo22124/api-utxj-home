@@ -9,18 +9,18 @@ garageController.getAllgarageData = async (req, res, next) => {
         let sensorsData = [];
         let actuatorsData = []
 
-        const garageName = req.query.location; //! Getting bedroom name of location param
+        const garageName = req.query.location; //! Getting garage name of location param
         console.log(garageName);
         const dataLimit = req.query.limit;
         const dataSortBy = req.query.sortBy;
         const dataTypeSort = req.query.typeSort;
 
-        //* if bedroom name exist, controller get data filtered by location
+        //* if garage name exist, controller get data filtered by location
         if (garageName) {
             sensorsData = await garageDao.getgarageSensorsByName(garageName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
             actuatorsData = await garageDao.getgarageActuatorsByName(garageName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
         } else { 
-            // * if bedroom name not exist, data get of all bedrooms
+            // * if garage name not exist, data get of all garages
             sensorsData = await garageDao.getgarageSensors();
             actuatorsData = await garageDao.getgarageActuators();
         }
@@ -33,7 +33,7 @@ garageController.getAllgarageData = async (req, res, next) => {
             actuatorsData
         })
     } catch (error) {
-        console.error(`Error in Bedrooms Controller: getAllgaragesData: ${error.message}`);
+        console.error(`Error in Garages Controller: getAllgaragesData: ${error.message}`);
         next(error) //Continue to global error handler (error middleware) 
         throw error;
     }
@@ -41,7 +41,7 @@ garageController.getAllgarageData = async (req, res, next) => {
 
 garageController.creategarageData = async (req, res, next) => {
     try {
-        //* get newData for bedroom of request body
+        //* get newData for garage of request body
         const newData =  req.body;
 
         if (!newData) {
@@ -57,7 +57,7 @@ garageController.creategarageData = async (req, res, next) => {
         })
         
     } catch (error) {
-        console.error(`Error in garage Controller: createBedroomData: ${error.message}`);
+        console.error(`Error in garage Controller: createGarageData: ${error.message}`);
         // next is a http request method that let to continue to next middleware in the list (this case the next middleware is error handler)
         // error handler is a global middleware that is used to response errors to client, this manage errors 
         next(error) //Continue to global error handler (error middleware) 
@@ -65,3 +65,25 @@ garageController.creategarageData = async (req, res, next) => {
         
     }
 }
+
+garageController.getLastRecords = async (req, res, next) => {
+    try {
+        const garageName = req.query.location;
+
+        if (!garageName) {
+            throw new NotFoundException("Location parameter is required.");
+        }
+
+        const { actuatorsLastRecord, sensorsLastRecord } = await garageDao.getLastRecords(garageName);
+
+        res.status(200).json({
+            success: true,
+            sensorsData: sensorsLastRecord,
+            actuatorsData: actuatorsLastRecord
+        });
+    } catch (error) {
+        console.error(`Error in Last Records Controller: getLastRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+};

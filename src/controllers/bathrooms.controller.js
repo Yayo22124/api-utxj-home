@@ -65,3 +65,25 @@ bathroomsController.createBathroomData = async (req, res, next) => {
         
     }
 }
+
+bathroomsController.getLastRecords = async (req, res, next) => {
+    try {
+        const bathroomName = req.query.location;
+
+        if (!bathroomName) {
+            throw new NotFoundException("Location parameter is required.");
+        }
+
+        const { actuatorsLastRecord, sensorsLastRecord } = await bathroomDao.getLastRecords(bathroomName);
+
+        res.status(200).json({
+            success: true,
+            sensorsData: sensorsLastRecord,
+            actuatorsData: actuatorsLastRecord
+        });
+    } catch (error) {
+        console.error(`Error in Last Records Controller: getLastRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+};

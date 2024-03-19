@@ -1,5 +1,5 @@
 import Kitchen from "../models/kitchen.schema.js";
-import { NotFoundException } from "../errors/index.js" 
+import { NotFoundException } from "../errors/index.js"
 
 export const KitchenDao = {}
 
@@ -119,3 +119,45 @@ KitchenDao.createKitchenData = async (newData) => {
         throw error;
     }
 }
+
+KitchenDao.getLastRecords = async (kitchenName) => {
+    try {
+        const sensorsLastRecord = await Kitchen.aggregate([
+            { 
+                $match: {
+                    type: /sensor/i,
+                    location: kitchenName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        const actuatorsLastRecord = await Kitchen.aggregate([
+            { 
+                $match: {
+                    type: /actuador/i,
+                    location: kitchenName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        return {
+            sensorsLastRecord,
+            actuatorsLastRecord
+        };
+    } catch (error) {
+        console.error(`Error in getLastRecords: ${error.message}`);
+        throw error;
+    }
+};

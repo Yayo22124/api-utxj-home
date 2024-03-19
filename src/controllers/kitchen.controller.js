@@ -65,3 +65,25 @@ kitchensController.createkitchenData = async (req, res, next) => {
         
     }
 }
+
+kitchensController.getLastRecords = async (req, res, next) => {
+    try {
+        const kitchenName = req.query.location;
+
+        if (!kitchenName) {
+            throw new NotFoundException("Location parameter is required.");
+        }
+
+        const { actuatorsLastRecord, sensorsLastRecord } = await KitchenDao.getLastRecords(kitchenName);
+
+        res.status(200).json({
+            success: true,
+            sensorsData: sensorsLastRecord,
+            actuatorsData: actuatorsLastRecord
+        });
+    } catch (error) {
+        console.error(`Error in Last Records Controller: getLastRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+};

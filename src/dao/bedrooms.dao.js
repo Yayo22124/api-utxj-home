@@ -18,7 +18,6 @@ bedroomDao.getAllBedrooms = async () => {
     }
 }
 
-
 // ! Get only information of bedrooms filter by type = sensors
 bedroomDao.getBedroomsSensors = async () => {
     try {
@@ -27,7 +26,7 @@ bedroomDao.getBedroomsSensors = async () => {
         }).sort({
             initialDate: 1
         });
-        
+
         return sensorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
@@ -43,7 +42,7 @@ bedroomDao.getBedroomsActuators = async () => {
         }).sort({
             initialDate: 1
         });
-        
+
         return actuatorsData;
     } catch (error) {
         console.error(`Error in bedroomDao getAllbedrooms: ${error.message}`);
@@ -54,7 +53,6 @@ bedroomDao.getBedroomsActuators = async () => {
 // ! Get only information of bedrooms filter by type = sensors and by location name
 bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 10, sortBy, typeSort = 'asc') => {
     try {
-        let sensorsData = [];
         if (sortBy) {
             // Check if sortBy is a valid property of Bedroom
             const validSortProperty = Object.keys(Bedroom.schema.paths).includes(sortBy);
@@ -121,3 +119,48 @@ bedroomDao.createBedroomData = async (newData) => {
         throw error;
     }
 }
+
+bedroomDao.getLastRecords = async (bedroomName) => {
+    try {
+        const sensorsLastRecord = await Bedroom.aggregate([
+            { 
+                $match: {
+                    type: /sensor/i,
+                    location: bedroomName
+                }
+            },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        const actuatorsLastRecord = await Bedroom.aggregate([
+            { 
+                $match: {
+                    type: /actuador/i,
+                    location: bedroomName
+                }
+            },
+            // {
+            //     $sort: { registeredDate: -1 } // Ordena por fecha de registro en orden descendente
+            // },
+            {
+                $group: {
+                    _id: "$name",
+                    lastRecord: { $last: "$$ROOT" }
+                }
+            }
+        ]);
+
+        return {
+            sensorsLastRecord,
+            actuatorsLastRecord
+        };
+    } catch (error) {
+        console.error(`Error in getLastRecords: ${error.message}`);
+        throw error;
+    }
+};

@@ -17,8 +17,8 @@ bedroomsController.getAllBedroomsData = async (req, res, next) => {
         
         //* if bedroom name exist, controller get data filtered by location
         if (bedroomName) {
-            sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
-            actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort);
+            sensorsData = await bedroomDao.getBedroomsSensorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort ? dataTypeSort : 'asc');
+            actuatorsData = await bedroomDao.getBedroomsActuatorsByName(bedroomName, dataLimit || 10, dataSortBy || 'registeredDate', dataTypeSort ? dataTypeSort : 'asc');
         } else { 
             // * if bedroom name not exist, data get of all bedrooms
             sensorsData = await bedroomDao.getBedroomsSensors();
@@ -65,3 +65,25 @@ bedroomsController.createBedroomData = async (req, res, next) => {
         
     }
 }
+
+bedroomsController.getLastRecords = async (req, res, next) => {
+    try {
+        const bedroomName = req.query.location;
+
+        if (!bedroomName) {
+            throw new NotFoundException("Location parameter is required.");
+        }
+
+        const { actuatorsLastRecord, sensorsLastRecord } = await bedroomDao.getLastRecords(bedroomName);
+
+        res.status(200).json({
+            success: true,
+            sensorsData: sensorsLastRecord,
+            actuatorsData: actuatorsLastRecord
+        });
+    } catch (error) {
+        console.error(`Error in Last Records Controller: getLastRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+};

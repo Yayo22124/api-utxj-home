@@ -65,3 +65,26 @@ livingroomController.createLivingroomData = async (req, res, next) => {
         
     }
 }
+
+
+livingroomController.getLastRecords = async (req, res, next) => {
+    try {
+        const livingroomName = req.query.location;
+
+        if (!livingroomName) {
+            throw new NotFoundException("Location parameter is required.");
+        }
+
+        const { actuatorsLastRecord, sensorsLastRecord } = await livingroomDao.getLastRecords(livingroomName);
+
+        res.status(200).json({
+            success: true,
+            sensorsData: sensorsLastRecord,
+            actuatorsData: actuatorsLastRecord
+        });
+    } catch (error) {
+        console.error(`Error in Last Records Controller: getLastRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+};
