@@ -1,3 +1,4 @@
+import { NotFoundException } from "../errors/NotFoundException.error.js";
 import { roomsDao }  from "../dao/index.js"
 
 export const roomsController = {}; 

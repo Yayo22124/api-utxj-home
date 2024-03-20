@@ -87,3 +87,45 @@ bedroomsController.getLastRecords = async (req, res, next) => {
         throw error;
     }
 };
+
+bedroomsController.getSensorRecords = async (req,res, next) => {
+    try {
+        const bedroomName = req.query.location;
+        const sensorName = req.query.sensorName;
+        
+        if (!bedroomName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required")
+        }
+        const sensorRecords = await bedroomDao.getSensorRecords(bedroomName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            records: sensorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Bedrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
+
+bedroomsController.getActuatorRecords = async (req,res, next) => {
+    try {
+        const bedroomName = req.query.location;
+        const actuatorName = req.query.actuatorName;
+        
+        if (!bedroomName || !actuatorName) {
+            throw new NotFoundException("'location' and 'actuatorName' query params must be required")
+        }
+        const actuatorRecords = await bedroomDao.getActuatorRecords(bedroomName, actuatorName);
+
+        res.status(200).json({
+            success: true,
+            records: actuatorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Bedrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}

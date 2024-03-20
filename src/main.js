@@ -1,7 +1,8 @@
+import "./config/database.config.js";
+
 import * as dotenv from "dotenv";
 
 import app from "./app.js";
-import database from "./config/database.config.js";
 
 dotenv.config({
     path: "src/.env"

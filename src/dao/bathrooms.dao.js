@@ -41,7 +41,7 @@ bathroomDao.getBathroomsActuators = async () => {
         throw error;
     }
 }
-bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 10, sortBy, typeSort = 'asc') => {
+bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = [];
         if (sortBy) {
@@ -68,7 +68,7 @@ bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 10, sortBy,
         throw error;
     }
 }
-bathroomDao.getBathroomsActuatorsByName = async (bathroomName, limit = 10, sortBy, typeSort = 'asc') => {
+bathroomDao.getBathroomsActuatorsByName = async (bathroomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {

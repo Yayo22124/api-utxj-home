@@ -51,7 +51,7 @@ bedroomDao.getBedroomsActuators = async () => {
 }
 
 // ! Get only information of bedrooms filter by type = sensors and by location name
-bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 10, sortBy, typeSort = 'asc') => {
+bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = []
         if (sortBy) {
@@ -81,7 +81,7 @@ bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 10, sortBy, ty
 }
 
 // ! Get only information of bedrooms filter by type = actuators and by location name
-bedroomDao.getBedroomsActuatorsByName = async (bedroomName, limit = 10, sortBy, typeSort = 'asc') => {
+bedroomDao.getBedroomsActuatorsByName = async (bedroomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {
@@ -165,3 +165,34 @@ bedroomDao.getLastRecords = async (bedroomName) => {
         throw error;
     }
 };
+
+
+bedroomDao.getSensorRecords = async (bedroomName, sensorName) => {
+    try {
+        const sensorRecords = await Bedroom.find({
+            type: /sensor/i,
+            location: bedroomName,
+            name: sensorName
+        }).sort("-registeredDate")
+
+        return sensorRecords
+    } catch (error) {
+        console.error(`Error in bedroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}
+
+bedroomDao.getActuatorRecords = async (bedroomName, actuatorName) => {
+    try {
+        const actuatorRecords = await Bedroom.find({
+            type: /actuador/i,
+            location: bedroomName,
+            name: actuatorName
+        }).sort("-registeredDate")
+
+        return actuatorRecords
+    } catch (error) {
+        console.error(`Error in bedroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}

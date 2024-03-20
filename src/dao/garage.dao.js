@@ -51,7 +51,7 @@ garageDao.getgarageActuators = async () => {
 }
 
 // ! Get only information of garage filter by type = sensors and by location name
-garageDao.getgarageSensorsByName = async (garageName, limit = 10, sortBy, typeSort = 'asc') => {
+garageDao.getgarageSensorsByName = async (garageName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = [];
         if (sortBy) {
@@ -81,7 +81,7 @@ garageDao.getgarageSensorsByName = async (garageName, limit = 10, sortBy, typeSo
 }
 
 // ! Get only information of garage filter by type = actuators and by location name
-garageDao.getgarageActuatorsByName = async (garageName, limit = 10, sortBy, typeSort = 'asc') => {
+garageDao.getgarageActuatorsByName = async (garageName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {

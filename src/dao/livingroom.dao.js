@@ -52,7 +52,7 @@ livingroomDao.getLivingroomActuators = async () => {
 }
 
 // ! Get only information of livingroom filter by type = sensors and by location name
-livingroomDao.getLivingroomSensorsByName = async (roomName, limit = 10, sortBy, typeSort = 'asc') => {
+livingroomDao.getLivingroomSensorsByName = async (roomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = [];
         if (sortBy) {
@@ -82,7 +82,7 @@ livingroomDao.getLivingroomSensorsByName = async (roomName, limit = 10, sortBy, 
 }
 
 // ! Get only information of livingroom filter by type = actuators and by location name
-livingroomDao.getLivingroomActuatorsByName = async (roomName, limit = 10, sortBy, typeSort = 'asc') => {
+livingroomDao.getLivingroomActuatorsByName = async (roomName, limit = 1000, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {
