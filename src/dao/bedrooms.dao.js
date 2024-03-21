@@ -262,7 +262,7 @@ bedroomDao.getSensorChartData = async (bedroomName, sensorName) => {
             }
 
             // Devolver un solo arreglo con los valores del sensor
-            return [sensorData.map(entry => entry.value)];
+            return sensorData.map(entry => entry.value);
         }
     } catch (error) {
         console.error(`Error in bedroomDAO getSensorChartData: ${error.message}`);
