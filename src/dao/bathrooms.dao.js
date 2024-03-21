@@ -147,3 +147,33 @@ bathroomDao.getLastRecords = async (bathroomName) => {
         throw error;
     }
 };
+
+bathroomDao.getSensorRecords = async (bathroomName, sensorName) => {
+    try {
+        const sensorRecords = await Bathroom.find({
+            type: /sensor/i,
+            location: bathroomName,
+            name: sensorName
+        }).sort("-registeredDate")
+
+        return sensorRecords
+    } catch (error) {
+        console.error(`Error in bathroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}
+
+bathroomDao.getActuatorRecords = async (bathroomName, actuatorName) => {
+    try {
+        const actuatorRecords = await Bathroom.find({
+            type: /actuador/i,
+            location: bathroomName,
+            name: actuatorName
+        }).sort("-registeredDate")
+
+        return actuatorRecords
+    } catch (error) {
+        console.error(`Error in bathroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}

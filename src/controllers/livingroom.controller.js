@@ -88,3 +88,46 @@ livingroomController.getLastRecords = async (req, res, next) => {
         throw error;
     }
 };
+
+
+livingroomController.getSensorRecords = async (req,res, next) => {
+    try {
+        const livingroomName = req.query.location;
+        const sensorName = req.query.sensorName;
+        
+        if (!livingroomName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required")
+        }
+        const sensorRecords = await livingroomDao.getSensorRecords(livingroomName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            records: sensorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Livingrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
+
+livingroomController.getActuatorRecords = async (req,res, next) => {
+    try {
+        const livingroomName = req.query.location;
+        const actuatorName = req.query.actuatorName;
+        
+        if (!livingroomName || !actuatorName) {
+            throw new NotFoundException("'location' and 'actuatorName' query params must be required")
+        }
+        const actuatorRecords = await livingroomDao.getActuatorRecords(livingroomName, actuatorName);
+
+        res.status(200).json({
+            success: true,
+            records: actuatorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Livingrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}

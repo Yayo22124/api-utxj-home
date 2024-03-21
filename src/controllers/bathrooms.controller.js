@@ -87,3 +87,46 @@ bathroomsController.getLastRecords = async (req, res, next) => {
         throw error;
     }
 };
+
+
+bathroomsController.getSensorRecords = async (req,res, next) => {
+    try {
+        const bathroomName = req.query.location;
+        const sensorName = req.query.sensorName;
+        
+        if (!bathroomName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required")
+        }
+        const sensorRecords = await bathroomDao.getSensorRecords(bathroomName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            records: sensorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Bathrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
+
+bathroomsController.getActuatorRecords = async (req,res, next) => {
+    try {
+        const bathroomName = req.query.location;
+        const actuatorName = req.query.actuatorName;
+        
+        if (!bathroomName || !actuatorName) {
+            throw new NotFoundException("'location' and 'actuatorName' query params must be required")
+        }
+        const actuatorRecords = await bathroomDao.getActuatorRecords(bathroomName, actuatorName);
+
+        res.status(200).json({
+            success: true,
+            records: actuatorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Bathrooms Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}

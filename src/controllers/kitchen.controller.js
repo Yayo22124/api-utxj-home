@@ -87,3 +87,47 @@ kitchensController.getLastRecords = async (req, res, next) => {
         throw error;
     }
 };
+
+
+
+kitchensController.getSensorRecords = async (req,res, next) => {
+    try {
+        const kitchenName = req.query.location;
+        const sensorName = req.query.sensorName;
+        
+        if (!kitchenName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required")
+        }
+        const sensorRecords = await KitchenDao.getSensorRecords(kitchenName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            records: sensorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Kitchens Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
+
+kitchensController.getActuatorRecords = async (req,res, next) => {
+    try {
+        const kitchenName = req.query.location;
+        const actuatorName = req.query.actuatorName;
+        
+        if (!kitchenName || !actuatorName) {
+            throw new NotFoundException("'location' and 'actuatorName' query params must be required")
+        }
+        const actuatorRecords = await KitchenDao.getActuatorRecords(kitchenName, actuatorName);
+
+        res.status(200).json({
+            success: true,
+            records: actuatorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Kitchens Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}

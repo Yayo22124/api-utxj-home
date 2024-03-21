@@ -162,3 +162,33 @@ garageDao.getLastRecords = async (garageName) => {
         throw error;
     }
 };
+
+garageDao.getSensorRecords = async (garageName, sensorName) => {
+    try {
+        const sensorRecords = await garage.find({
+            type: /sensor/i,
+            location: garageName,
+            name: sensorName
+        }).sort("-registeredDate")
+
+        return sensorRecords
+    } catch (error) {
+        console.error(`Error in garageDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}
+
+garageDao.getActuatorRecords = async (garageName, actuatorName) => {
+    try {
+        const actuatorRecords = await garage.find({
+            type: /actuador/i,
+            location: garageName,
+            name: actuatorName
+        }).sort("-registeredDate")
+
+        return actuatorRecords
+    } catch (error) {
+        console.error(`Error in garageDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}

@@ -163,3 +163,33 @@ livingroomDao.getLastRecords = async (livingroomName) => {
         throw error;
     }
 };
+
+livingroomDao.getSensorRecords = async (livingroomName, sensorName) => {
+    try {
+        const sensorRecords = await Livingroom.find({
+            type: /sensor/i,
+            location: livingroomName,
+            name: sensorName
+        }).sort("-registeredDate")
+
+        return sensorRecords
+    } catch (error) {
+        console.error(`Error in livingroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}
+
+livingroomDao.getActuatorRecords = async (livingroomName, actuatorName) => {
+    try {
+        const actuatorRecords = await Livingroom.find({
+            type: /actuador/i,
+            location: livingroomName,
+            name: actuatorName
+        }).sort("-registeredDate")
+
+        return actuatorRecords
+    } catch (error) {
+        console.error(`Error in livingroomDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}

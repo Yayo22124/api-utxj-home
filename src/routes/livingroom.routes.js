@@ -5,6 +5,8 @@ const livingroomRouter = Router();
 
 livingroomRouter.get('/', livingroomController.getAll);
 livingroomRouter.get('/last/', livingroomController.getLastRecords);
+livingroomRouter.get('/sensor/', livingroomController.getSensorRecords);
+livingroomRouter.get('/actuator/', livingroomController.getActuatorRecords);
 livingroomRouter.post('/', livingroomController.createLivingroomData);
 
 export default livingroomRouter

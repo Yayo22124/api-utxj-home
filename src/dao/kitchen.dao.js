@@ -161,3 +161,33 @@ KitchenDao.getLastRecords = async (kitchenName) => {
         throw error;
     }
 };
+
+KitchenDao.getSensorRecords = async (kitchenName, sensorName) => {
+    try {
+        const sensorRecords = await Kitchen.find({
+            type: /sensor/i,
+            location: kitchenName,
+            name: sensorName
+        }).sort("-registeredDate")
+
+        return sensorRecords
+    } catch (error) {
+        console.error(`Error in kitchenDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}
+
+KitchenDao.getActuatorRecords = async (kitchenName, actuatorName) => {
+    try {
+        const actuatorRecords = await Kitchen.find({
+            type: /actuador/i,
+            location: kitchenName,
+            name: actuatorName
+        }).sort("-registeredDate")
+
+        return actuatorRecords
+    } catch (error) {
+        console.error(`Error in kitchenDAO getSensorRecords: ${error.message}`);
+        throw error;
+    }
+}

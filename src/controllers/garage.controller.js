@@ -87,3 +87,46 @@ garageController.getLastRecords = async (req, res, next) => {
         throw error;
     }
 };
+
+
+garageController.getSensorRecords = async (req,res, next) => {
+    try {
+        const garageName = req.query.location;
+        const sensorName = req.query.sensorName;
+        
+        if (!garageName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required")
+        }
+        const sensorRecords = await garageDao.getSensorRecords(garageName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            records: sensorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Garages Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
+
+garageController.getActuatorRecords = async (req,res, next) => {
+    try {
+        const garageName = req.query.location;
+        const actuatorName = req.query.actuatorName;
+        
+        if (!garageName || !actuatorName) {
+            throw new NotFoundException("'location' and 'actuatorName' query params must be required")
+        }
+        const actuatorRecords = await garageDao.getActuatorRecords(garageName, actuatorName);
+
+        res.status(200).json({
+            success: true,
+            records: actuatorRecords
+        })
+    } catch (error) {
+        console.error(`Error in Garages Controller: getSensorRecords: ${error.message}`);
+        next(error);
+        throw error;
+    }
+}
