@@ -7,6 +7,7 @@ bedroomsRouter.get('/', bedroomsController.getAllBedroomsData);
 bedroomsRouter.get('/last/', bedroomsController.getLastRecords);
 bedroomsRouter.get('/sensor/', bedroomsController.getSensorRecords);
 bedroomsRouter.get('/actuator/', bedroomsController.getActuatorRecords);
+bedroomsRouter.get('/sensor/chart/', bedroomsController.getSensorChartData);
 // bedroomsRouter.get('/', bedroomsController.getAllBedroomsDataByName)
 bedroomsRouter.post('/', bedroomsController.createBedroomData);
 

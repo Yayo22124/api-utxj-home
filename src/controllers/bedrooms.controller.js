@@ -129,3 +129,24 @@ bedroomsController.getActuatorRecords = async (req,res, next) => {
         throw error;
     }
 }
+
+bedroomsController.getSensorChartData = async (req, res, next) => {
+    try {
+        const bedroomName = req.query.location;
+        const sensorName = req.query.sensorName;
+
+        if (!bedroomName || !sensorName) {
+            throw new NotFoundException("'location' and 'sensorName' query params must be required");
+        }
+
+        const sensorData = await bedroomDao.getSensorChartData(bedroomName, sensorName);
+
+        res.status(200).json({
+            success: true,
+            data: sensorData
+        });
+    } catch (error) {
+        console.error(`Error in Bedrooms Controller: getSensorChartData: ${error.message}`);
+        next(error);
+    }
+};

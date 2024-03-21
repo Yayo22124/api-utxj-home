@@ -196,3 +196,76 @@ bedroomDao.getActuatorRecords = async (bedroomName, actuatorName) => {
         throw error;
     }
 }
+
+
+bedroomDao.getSensorChartData = async (bedroomName, sensorName) => {
+    try {
+        if (sensorName === "Temperatura y Humedad") {
+            const sensorData = await Bedroom.aggregate([
+                { 
+                    $match: {
+                        type: /sensor/i,
+                        location: bedroomName,
+                        name: sensorName
+                    }
+                },
+                {
+                    $unwind: "$readings" // Descomponer el arreglo readings
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        name: "$readings.name",
+                        value: "$readings.value" // Extraer solo los valores de readings
+                    }
+                }
+            ]);
+
+            // Filtrar las lecturas de temperatura y humedad
+            const temperatureReadings = sensorData.filter(entry => entry.name.toLowerCase().includes('temperatura'));
+            const humidityReadings = sensorData.filter(entry => entry.name.toLowerCase().includes('humedad'));
+
+            // Verificar si se encontraron lecturas para temperatura y humedad
+            if (!temperatureReadings.length || !humidityReadings.length) {
+                throw new NotFoundException("Lectura de temperatura o humedad no encontrada");
+            }
+
+            // Extraer solo los valores de temperatura y humedad
+            const temperatureValues = temperatureReadings.map(entry => entry.value);
+            const humidityValues = humidityReadings.map(entry => entry.value);
+
+            // Devolver dos arreglos, uno para la temperatura y otro para la humedad
+            return [temperatureValues, humidityValues];
+        } else {
+            // Para otros sensores, manejarlos de manera similar a como lo estabas haciendo antes
+            const sensorData = await Bedroom.aggregate([
+                { 
+                    $match: {
+                        type: /sensor/i,
+                        location: bedroomName,
+                        name: sensorName
+                    }
+                },
+                {
+                    $unwind: "$readings" // Descomponer el arreglo readings
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        value: "$readings.value" // Extraer solo los valores de readings
+                    }
+                }
+            ]);
+
+            if (sensorData.length === 0) {
+                throw new NotFoundException(`No se encontraron datos para el sensor ${sensorName} en la habitación ${bedroomName}`);
+            }
+
+            // Devolver un solo arreglo con los valores del sensor
+            return [sensorData.map(entry => entry.value)];
+        }
+    } catch (error) {
+        console.error(`Error in bedroomDAO getSensorChartData: ${error.message}`);
+        throw error;
+    }
+}
