@@ -50,7 +50,7 @@ KitchenDao.getKitchensActuators = async () => {
 }
 
 // ! Get only information of Kitchens filter by type = sensors and by location name
-KitchenDao.getKitchensSensorsByName = async (KitchenName, limit = 1000, sortBy, typeSort = 'asc') => {
+KitchenDao.getKitchensSensorsByName = async (KitchenName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = [];
         if (sortBy) {
@@ -80,7 +80,7 @@ KitchenDao.getKitchensSensorsByName = async (KitchenName, limit = 1000, sortBy, 
 }
 
 // ! Get only information of Kitchens filter by type = actuators and by location name
-KitchenDao.getKitchensActuatorsByName = async (KitchenName, limit = 1000, sortBy, typeSort = 'asc') => {
+KitchenDao.getKitchensActuatorsByName = async (KitchenName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {
@@ -168,7 +168,7 @@ KitchenDao.getSensorRecords = async (kitchenName, sensorName) => {
             type: /sensor/i,
             location: kitchenName,
             name: sensorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return sensorRecords
     } catch (error) {
@@ -183,7 +183,7 @@ KitchenDao.getActuatorRecords = async (kitchenName, actuatorName) => {
             type: /actuador/i,
             location: kitchenName,
             name: actuatorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return actuatorRecords
     } catch (error) {

@@ -41,7 +41,7 @@ bathroomDao.getBathroomsActuators = async () => {
         throw error;
     }
 }
-bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 1000, sortBy, typeSort = 'asc') => {
+bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = [];
         if (sortBy) {
@@ -68,7 +68,7 @@ bathroomDao.getBathroomsSensorsByName = async (bathroomName, limit = 1000, sortB
         throw error;
     }
 }
-bathroomDao.getBathroomsActuatorsByName = async (bathroomName, limit = 1000, sortBy, typeSort = 'asc') => {
+bathroomDao.getBathroomsActuatorsByName = async (bathroomName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {
@@ -154,7 +154,7 @@ bathroomDao.getSensorRecords = async (bathroomName, sensorName) => {
             type: /sensor/i,
             location: bathroomName,
             name: sensorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return sensorRecords
     } catch (error) {
@@ -169,7 +169,7 @@ bathroomDao.getActuatorRecords = async (bathroomName, actuatorName) => {
             type: /actuador/i,
             location: bathroomName,
             name: actuatorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return actuatorRecords
     } catch (error) {

@@ -51,7 +51,7 @@ bedroomDao.getBedroomsActuators = async () => {
 }
 
 // ! Get only information of bedrooms filter by type = sensors and by location name
-bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 1000, sortBy, typeSort = 'asc') => {
+bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let sensorsData = []
         if (sortBy) {
@@ -81,7 +81,7 @@ bedroomDao.getBedroomsSensorsByName = async (bedroomName, limit = 1000, sortBy, 
 }
 
 // ! Get only information of bedrooms filter by type = actuators and by location name
-bedroomDao.getBedroomsActuatorsByName = async (bedroomName, limit = 1000, sortBy, typeSort = 'asc') => {
+bedroomDao.getBedroomsActuatorsByName = async (bedroomName, limit = 500, sortBy, typeSort = 'asc') => {
     try {
         let actuatorsData = [];
         if (sortBy) {
@@ -136,7 +136,7 @@ bedroomDao.getLastRecords = async (bedroomName) => {
                     lastRecord: { $last: "$$ROOT" }
                 }
             }
-        ]);
+        ])
 
         const actuatorsLastRecord = await Bedroom.aggregate([
             { 
@@ -173,7 +173,7 @@ bedroomDao.getSensorRecords = async (bedroomName, sensorName) => {
             type: /sensor/i,
             location: bedroomName,
             name: sensorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return sensorRecords
     } catch (error) {
@@ -188,7 +188,7 @@ bedroomDao.getActuatorRecords = async (bedroomName, actuatorName) => {
             type: /actuador/i,
             location: bedroomName,
             name: actuatorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return actuatorRecords
     } catch (error) {

@@ -169,7 +169,7 @@ garageDao.getSensorRecords = async (garageName, sensorName) => {
             type: /sensor/i,
             location: garageName,
             name: sensorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return sensorRecords
     } catch (error) {
@@ -184,7 +184,7 @@ garageDao.getActuatorRecords = async (garageName, actuatorName) => {
             type: /actuador/i,
             location: garageName,
             name: actuatorName
-        }).sort("-registeredDate")
+        }).sort("-registeredDate").limit(500)
 
         return actuatorRecords
     } catch (error) {
