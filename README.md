@@ -24,14 +24,24 @@ git clone https://github.com/Yayo22124/api-utxj-home.git
 npm install
 ```
 
-#### 3.- Crear archivo de variables de entorno
+#### 3.- Configurar base de datos (MongoDB)
+
+Para utilizar mongodb, es necesario crear una base de datos específica para el proyecto, por ejemplo `bd_ihouse` y las colecciones que tendrá serán:
+
+- bedrooms
+- livingrooms
+- bathrooms
+- garages
+- kitchens
+
+#### 4.- Crear archivo de variables de entorno
 
 Este proyecto usa `dotenv` para almacenar y usar variables de entorno seguras, es necesario crear un archivo **.env** dentro del directorio de **src** y colocar dentro las siguientes variables de entorno:
 
 - PORT: El puerto a utilizar para levantar el servidor HTTP de Express
-- CONNECTION_DB: La url de la base de datos a utilizar (Mongo) puede ser igual al cluster o a su bd local.
+- CONNECTION_DB: La url de la base de datos a utilizar (Mongo) puede ser igual al cluster o a su bd local, es necesario señalar en la URL, la base de datos previamente utilizada. Por ejemplo para una URL local con la base de datos bd_ihouse, sería: `mongodb://localhost:27017/bd_ihouse`
 
-#### 4.- Ejecutar proyecto
+#### 5.- Ejecutar proyecto
 
 ```bash
 npm run start:dev
