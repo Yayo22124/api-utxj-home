@@ -10,6 +10,34 @@ Este documento presenta la información y documentación necesaria para hacer us
 
 
 
+## Instalación y Configuración
+
+#### 1.- Clonar Repositorio
+
+```bash
+git clone https://github.com/Yayo22124/api-utxj-home.git
+```
+
+#### 2.- Instalar Dependencias
+
+```bash
+npm install
+```
+
+#### 3.- Crear archivo de variables de entorno
+
+Este proyecto usa `dotenv` para almacenar y usar variables de entorno seguras, es necesario crear un archivo **.env** dentro del directorio de **src** y colocar dentro las siguientes variables de entorno:
+
+- PORT: El puerto a utilizar para levantar el servidor HTTP de Express
+- CONNECTION_DB: La url de la base de datos a utilizar (Mongo) puede ser igual al cluster o a su bd local.
+
+#### 4.- Ejecutar proyecto
+
+```bash
+npm run start:dev
+```
+
+
 ## API REST Endpoints
 
 > [!IMPORTANT]  
